@@ -66,7 +66,7 @@ function PcbMap(props) {
     return <div className={"max-w-max relative top-0 left-0 h-full max-h-full " + className} {...others}>
         <img src={src}
                 alt="PCB Preview"
-                className="tight-shadow max-h-full"
+                className="max-h-full"
                 ref={observe}/>
         {/* SVG for drawing annotations */}
         <svg className="absolute top-0 left-0"
@@ -334,7 +334,7 @@ function Help(props) {
                     you actually make connections on the real board based
                     on the diagram.</p>
 
-                <button className="w-full rounded p-3 my-1 shadow bg-blue-400"
+                <button className="w-full rounded p-3 my-1 shadow bg-button"
                     onClick={() => setExpanded(false)}>
                     OK, got it!
                 </button>
@@ -360,9 +360,6 @@ function PinionLayout(props) {
     let contentHeight = fit ? containerHeight - headerHeight : "auto"
 
     return <div ref={containerRef} className="w-full h-full relative top-0 left-0 " {...others}>
-        <div ref={headerRef} className="w-full overflow-auto">
-            { head }
-        </div>
         <div className="w-full"
              style={{height: contentHeight}}>
             { children }
@@ -380,9 +377,6 @@ function PinionHeader(props) {
             <h1 className="w-max text-2xl font-semibold flex-initial">
                 {spec.name}
             </h1>
-            <Help
-                className="w-max align-middle text-xs flex-1 text-right"
-                style={{minWidth: "200px"}}/>
         </div>
         <ReactMarkdown>{spec.description}</ReactMarkdown>
     </>;
@@ -522,7 +516,6 @@ export function PinionWidget(props) {
                                          (maximized ? "bg-white fixed inset-0 z-max" : "")}>
         <PinionLayout
                 fit={maximized}
-                head={<PinionHeader spec={spec}/>}
                 footer={<PinionFooter/>}>
             <div className="w-full flex flex-wrap my-4 h-full">
                 <div className={"px-4 py-4 flex-none max-h-full " + treeClass} style={treeStyle}>
@@ -607,16 +600,16 @@ export function PinionWidget(props) {
                         />
                 </div>
                 <div className={"px-2 py-4 flex-auto max-h-full " + labelClass} style={labelStyle}>
-                    <button className="w-full rounded p-3 mb-2 shadow bg-blue-400"
+                    <button className="w-full rounded p-3 mb-2 shadow bg-button"
                             onClick={() => setMaximized(!maximized)}>
                         { maximized ? "Minimize" : "Maximize" }
                     </button>
                     <div className="w-full flex mb-4">
-                        <button className={"flex-1 mr-1 rounded p-3 shadow " + (frontActive ? "bg-blue-400" : "bg-blue-200")}
+                        <button className={"flex-1 mr-1 rounded p-3 shadow " + (frontActive ? "bg-button" : "bg-button-light")}
                                 onClick={() => setFrontActive(true)}>
                             Front side
                         </button>
-                        <button className={"flex-1 mr-1 rounded p-3 shadow " + (!frontActive ? "bg-blue-400" : "bg-blue-200")}
+                        <button className={"flex-1 mr-1 rounded p-3 shadow " + (!frontActive ? "bg-button" : "bg-button-light")}
                                 onClick={() => setFrontActive(false)}>
                             Back side
                         </button>
@@ -624,7 +617,7 @@ export function PinionWidget(props) {
                     <div className="w-full flex mb-4">
                         {
                             pinnedPins.size === 0 && selectedComponent === null ? <></> :
-                            <button className="w-full rounded p-3 mb-2 shadow bg-blue-400"
+                            <button className="w-full rounded p-3 mb-2 shadow bg-button"
                                     onClick={() => {
                                         setPinnedPins(new Map());
                                         setPinnedComponent(null);

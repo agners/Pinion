@@ -66,6 +66,14 @@ a {
     @apply text-blue-500 hover:text-blue-800 border-b-2 border-blue-500;
 }
 
+.bg-button {
+    background-color: #ffc900;
+}
+
+.bg-button-light {
+    background-color: #ffe920;
+}
+
 .z-max {
     z-index: 999999;
 }
